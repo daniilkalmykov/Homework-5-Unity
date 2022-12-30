@@ -33,38 +33,23 @@ public class Signalization : MonoBehaviour
             robber.Reach();
 
             _activated?.Invoke();
-            StartCoroutine(Activate(robber.WaitingTime));
+            StartCoroutine(Activate(robber.WaitingTime, robber));
         }
     }
 
-    private IEnumerator Activate(float playingTime)
+    private IEnumerator Activate(float playingTime, Robber robber)
     {
-        while (_audioSource.volume <= _maxVolume)
+        while (true)
         {
+            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, robber.Reached ? _maxVolume : _minVolume, _maxVolume / playingTime);
+
+            if (_audioSource.volume <= _minVolume) 
+                break;
+            
             var waitForOneSecond = new WaitForSeconds(1);
             yield return waitForOneSecond;
-
-            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, _maxVolume, _maxVolume / playingTime);
-
-            if (_audioSource.volume >= _maxVolume)
-            {
-                break;
-            }
         }
-
-        while (_audioSource.volume > _minVolume)
-        {
-            var waitForOneSecond = new WaitForSeconds(1);
-            yield return waitForOneSecond;
-
-            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, _minVolume, _maxVolume / playingTime);
-
-            if (_audioSource.volume <= _minVolume)
-            {
-                break;
-            }
-        }
-
+        
         _audioSource.Stop();
     }
 }

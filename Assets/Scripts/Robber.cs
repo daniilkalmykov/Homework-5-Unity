@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -7,6 +8,8 @@ public class Robber : MonoBehaviour
     [SerializeField] private float _waitingTime;
     [SerializeField] private float _speed;
 
+    private static readonly int Speed = Animator.StringToHash("Speed");
+    
     private Animator _animator;
     private Vector3 _target;
     private Vector3 _startPosition;
@@ -15,7 +18,8 @@ public class Robber : MonoBehaviour
     private bool _reached;
 
     public float WaitingTime => _waitingTime;
-
+    public bool Reached => _reached;
+    
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -33,32 +37,42 @@ public class Robber : MonoBehaviour
     private void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, _target, _speed * Time.deltaTime);
-
+        
         if (_reached)
         {
-            _timer += Time.deltaTime;
             _speed = 0;
 
-            if (_timer >= _waitingTime)
-            {
-                _timer = 0;
-                _target = _startPosition;
-
-                _reached = false;
-            }
+            StartCoroutine(WaitTime());
         }
         else
         {
             _speed = _startSpeed;
+            
+            StopCoroutine(WaitTime());
         }
         
         transform.LookAt(_target);
         
-        _animator.SetFloat("Speed", _speed);
+        _animator.SetFloat(Speed, _speed);
     }
 
     public void Reach()
     {
         _reached = true;
+    }
+
+    private IEnumerator WaitTime()
+    {
+        _timer += Time.deltaTime;
+        
+        if (_timer >= _waitingTime)
+        {
+            _timer = 0;
+            _target = _startPosition;
+
+            _reached = false;
+        }
+        
+        yield return null;
     }
 }
