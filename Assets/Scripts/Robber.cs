@@ -8,7 +8,7 @@ public class Robber : MonoBehaviour
     [SerializeField] private float _waitingTime;
     [SerializeField] private float _speed;
 
-    private static readonly int Speed = Animator.StringToHash("Speed");
+    private readonly int _speedAnimatorParameter = Animator.StringToHash("Speed");
     
     private Animator _animator;
     private Vector3 _target;
@@ -53,7 +53,7 @@ public class Robber : MonoBehaviour
         
         transform.LookAt(_target);
         
-        _animator.SetFloat(Speed, _speed);
+        _animator.SetFloat(_speedAnimatorParameter, _speed);
     }
 
     public void Reach()

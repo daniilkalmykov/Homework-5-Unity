@@ -26,18 +26,12 @@ public class Signalization : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void InvokeEvent()
     {
-        if (other.TryGetComponent(out Robber robber))
-        {
-            robber.Reach();
-
-            _activated?.Invoke();
-            StartCoroutine(Activate(robber.WaitingTime, robber));
-        }
+        _activated?.Invoke();
     }
 
-    private IEnumerator Activate(float playingTime, Robber robber)
+    public IEnumerator Activate(float playingTime, Robber robber)
     {
         while (true)
         {
