@@ -48,7 +48,11 @@ public class Robber : MonoBehaviour
         else
         {
             _speed = _startSpeed;
-        }        
+        }
+        
+        transform.LookAt(_target);
+        
+        _animator.SetFloat("Speed", _speed);
     }
 
     public void Reach()
