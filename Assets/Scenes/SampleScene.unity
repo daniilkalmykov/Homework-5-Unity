@@ -168,8 +168,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5316558, y: 2.2729864, z: 2.0019886}
-  m_Center: {x: 0.039843798, y: 1.2685244, z: -0.5009948}
+  m_Size: {x: 2.5029905, y: 2.2729864, z: 3.0810268}
+  m_Center: {x: -0.056986928, y: 1.2685244, z: -1.0405139}
 --- !u!114 &508145388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3990464e82460da4d8f2cc7fae4b456c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _reached:
+  _activated:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 508145389}
@@ -197,12 +197,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _exited:
-    m_PersistentCalls:
-      m_Calls: []
   _minVolume: 0
   _maxVolume: 0.4
-  _playingTime: 3
 --- !u!82 &508145389
 AudioSource:
   m_ObjectHideFlags: 0
@@ -217,13 +213,13 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 0
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 2.729635
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -391,7 +387,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -690,6 +686,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2765010787563658680, guid: e5e9afd218fecd947bb7c2e8f1d2528c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3070930997446320802, guid: e5e9afd218fecd947bb7c2e8f1d2528c, type: 3}
       propertyPath: m_Constraints
       value: 84
@@ -708,7 +708,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3248390581707769602, guid: e5e9afd218fecd947bb7c2e8f1d2528c, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3248390581707769602, guid: e5e9afd218fecd947bb7c2e8f1d2528c, type: 3}
       propertyPath: m_LocalPosition.x

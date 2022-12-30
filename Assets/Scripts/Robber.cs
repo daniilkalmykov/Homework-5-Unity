@@ -14,6 +14,8 @@ public class Robber : MonoBehaviour
     private float _startSpeed;
     private bool _reached;
 
+    public float WaitingTime => _waitingTime;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
