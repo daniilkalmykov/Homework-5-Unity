@@ -168,6 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3990464e82460da4d8f2cc7fae4b456c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _robber: {fileID: 1940711775}
+  _door: {fileID: 2015696350}
   _activated:
     m_PersistentCalls:
       m_Calls:
@@ -185,6 +187,7 @@ MonoBehaviour:
         m_CallState: 2
   _minVolume: 0
   _maxVolume: 0.4
+  _timeBetweenIterations: 1
 --- !u!82 &508145389
 AudioSource:
   m_ObjectHideFlags: 0
@@ -556,6 +559,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1940711775 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3070930997446320805, guid: e5e9afd218fecd947bb7c2e8f1d2528c, type: 3}
+  m_PrefabInstance: {fileID: 3070930996692629431}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a337bc65d2fde947a5034651d9b239a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2015696348
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -678,7 +692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac858bf7bd0657b479d364b378f6dc58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _signalization: {fileID: 508145388}
+  _detected: 0
 --- !u!65 &2015696351
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -701,7 +715,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2765010787563658680, guid: e5e9afd218fecd947bb7c2e8f1d2528c, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Robber
       objectReference: {fileID: 0}
     - target: {fileID: 2765010787563658680, guid: e5e9afd218fecd947bb7c2e8f1d2528c, type: 3}
       propertyPath: m_IsActive

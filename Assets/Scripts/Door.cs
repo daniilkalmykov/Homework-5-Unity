@@ -2,16 +2,22 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] private Signalization _signalization;
+    private bool _detected;
+
+    public bool Detected => _detected;
     
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Robber robber))
         {
+            _detected = true;
+            
             robber.Reach();
-
-            _signalization.InvokeEvent();
-            StartCoroutine(_signalization.Activate(robber.WaitingTime, robber));
         }
+    }
+
+    public void NotDetect()
+    {
+        _detected = false;
     }
 }
