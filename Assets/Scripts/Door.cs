@@ -2,22 +2,25 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    private bool _detected;
+    public bool Detected { get; private set; }
 
-    public bool Detected => _detected;
-    
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Robber robber))
         {
-            _detected = true;
+            Detected = true;
             
             robber.Reach();
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log("Deactivated!");
+    }
+
     public void NotDetect()
     {
-        _detected = false;
+        Detected = false;
     }
 }

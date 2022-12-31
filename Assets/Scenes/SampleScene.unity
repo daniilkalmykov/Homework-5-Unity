@@ -376,7 +376,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -692,7 +692,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac858bf7bd0657b479d364b378f6dc58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _detected: 0
 --- !u!65 &2015696351
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -739,7 +738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3248390581707769602, guid: e5e9afd218fecd947bb7c2e8f1d2528c, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3248390581707769602, guid: e5e9afd218fecd947bb7c2e8f1d2528c, type: 3}
       propertyPath: m_LocalPosition.x

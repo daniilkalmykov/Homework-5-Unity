@@ -11,19 +11,22 @@ public class Signalization : MonoBehaviour
     [SerializeField] private float _minVolume;
     [SerializeField] private float _maxVolume;
     [SerializeField] private float _timeBetweenIterations;
-    
-    private AudioSource _audioSource;
 
+    private const float MIN_DIFFERENCE = 0.1f;
+    private const float MIN_TIME_BETWEEN_ITERATIONS = 0.1f;
+
+    private AudioSource _audioSource;
+    
     private void OnValidate()
     {
         if (_minVolume > _maxVolume)
         {
-            _minVolume = _maxVolume - 0.1f;
+            _minVolume = _maxVolume - MIN_DIFFERENCE;
         }
 
-        if (_timeBetweenIterations <= 0)
+        if (_timeBetweenIterations < MIN_TIME_BETWEEN_ITERATIONS)
         {
-            _timeBetweenIterations = 0.1f;
+            _timeBetweenIterations = MIN_TIME_BETWEEN_ITERATIONS;
         }
     }
     
@@ -40,7 +43,7 @@ public class Signalization : MonoBehaviour
         {
             _activated?.Invoke();
             StartCoroutine(Activate());
-
+            
             _door.NotDetect();
         }
     }
@@ -49,7 +52,7 @@ public class Signalization : MonoBehaviour
     {
         while (true)
         {
-            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, _robber.Reached ? _maxVolume : _minVolume,
+            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, _robber.Reached ? _maxVolume : _minVolume, 
                 _maxVolume / _robber.WaitingTime);
 
             if (_audioSource.volume <= _minVolume) 

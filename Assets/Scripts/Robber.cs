@@ -15,15 +15,14 @@ public class Robber : MonoBehaviour
     private Vector3 _startPosition;
     private float _timer;
     private float _startSpeed;
-    private bool _reached;
 
     public float WaitingTime => _waitingTime;
-    public bool Reached => _reached;
-    
+    public bool Reached { get; private set; }
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _reached = false;
+        Reached = false;
     }
 
     private void Start()
@@ -38,7 +37,7 @@ public class Robber : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, _target, _speed * Time.deltaTime);
         
-        if (_reached)
+        if (Reached)
         {
             _speed = 0;
 
@@ -58,7 +57,7 @@ public class Robber : MonoBehaviour
 
     public void Reach()
     {
-        _reached = true;
+        Reached = true;
     }
 
     private IEnumerator WaitTime()
@@ -70,7 +69,7 @@ public class Robber : MonoBehaviour
             _timer = 0;
             _target = _startPosition;
 
-            _reached = false;
+            Reached = false;
         }
         
         yield return null;
