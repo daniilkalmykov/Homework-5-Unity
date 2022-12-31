@@ -1,26 +1,24 @@
+using System;
 using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public bool Detected { get; private set; }
+    public event Action Detected;
+    public event Action NotDetected;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Robber robber))
         {
-            Detected = true;
-            
-            robber.Reach();
+            Detected?.Invoke();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Deactivated!");
-    }
-
-    public void NotDetect()
-    {
-        Detected = false;
+        if (other.TryGetComponent(out Robber robber))
+        {
+            NotDetected?.Invoke();
+        }
     }
 }

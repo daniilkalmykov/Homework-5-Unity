@@ -168,26 +168,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3990464e82460da4d8f2cc7fae4b456c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _robber: {fileID: 1940711775}
   _door: {fileID: 2015696350}
-  _activated:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 508145389}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   _minVolume: 0
   _maxVolume: 0.4
   _timeBetweenIterations: 1
+  _volumeSpeed: 0.1
 --- !u!82 &508145389
 AudioSource:
   m_ObjectHideFlags: 0
@@ -376,7 +361,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -557,19 +542,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1940711775 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3070930997446320805, guid: e5e9afd218fecd947bb7c2e8f1d2528c, type: 3}
-  m_PrefabInstance: {fileID: 3070930996692629431}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a337bc65d2fde947a5034651d9b239a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2015696348
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -619,7 +593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7141927108607896883, guid: 163099117d8b97a4bb83120a495b01f9, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7141927108607896883, guid: 163099117d8b97a4bb83120a495b01f9, type: 3}
       propertyPath: m_LocalScale.x
@@ -673,7 +647,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4583389967097290691, guid: 163099117d8b97a4bb83120a495b01f9, type: 3}
+    - {fileID: 7318547679214062207, guid: 163099117d8b97a4bb83120a495b01f9, type: 3}
+    - {fileID: 1971729377797834507, guid: 163099117d8b97a4bb83120a495b01f9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 163099117d8b97a4bb83120a495b01f9, type: 3}
 --- !u!1 &2015696349 stripped
 GameObject:
@@ -729,16 +706,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3070930997446320805, guid: e5e9afd218fecd947bb7c2e8f1d2528c, type: 3}
+      propertyPath: _door
+      value: 
+      objectReference: {fileID: 2015696350}
+    - target: {fileID: 3070930997446320805, guid: e5e9afd218fecd947bb7c2e8f1d2528c, type: 3}
+      propertyPath: _delay
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3070930997446320805, guid: e5e9afd218fecd947bb7c2e8f1d2528c, type: 3}
       propertyPath: _point
       value: 
       objectReference: {fileID: 508145386}
+    - target: {fileID: 3070930997446320805, guid: e5e9afd218fecd947bb7c2e8f1d2528c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3070930997446320805, guid: e5e9afd218fecd947bb7c2e8f1d2528c, type: 3}
       propertyPath: _waitingTime
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3248390581707769602, guid: e5e9afd218fecd947bb7c2e8f1d2528c, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3248390581707769602, guid: e5e9afd218fecd947bb7c2e8f1d2528c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -778,6 +767,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3248390581707769602, guid: e5e9afd218fecd947bb7c2e8f1d2528c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931964971879193976, guid: e5e9afd218fecd947bb7c2e8f1d2528c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931964971879193976, guid: e5e9afd218fecd947bb7c2e8f1d2528c, type: 3}
+      propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
