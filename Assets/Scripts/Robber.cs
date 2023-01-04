@@ -17,8 +17,6 @@ public class Robber : MonoBehaviour
     private float _timer;
     private float _startSpeed;
 
-    public bool Reached { get; private set; }
-
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -52,10 +50,9 @@ public class Robber : MonoBehaviour
 
     private void OnReached()
     {
-        Reached = true;
         StartCoroutine(StayInTrigger());
-        _speed = 0;
         
+        _speed = 0;
         _animator.SetFloat(_speedAnimatorParameter, _speed);
     }
 
@@ -63,8 +60,6 @@ public class Robber : MonoBehaviour
     {
         yield return new WaitForSeconds(_delay);
 
-        Reached = false;
-        
         _target = _startPosition;
         transform.LookAt(_target);
         

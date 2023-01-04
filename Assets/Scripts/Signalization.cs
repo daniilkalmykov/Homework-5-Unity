@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ public class Signalization : MonoBehaviour
     private const float MinTimeBetweenIterations = 0.1f;
 
     private AudioSource _audioSource;
-    private bool _isCoroutineStarted;
+    private Coroutine _coroutine;
     
     private void OnValidate()
     {
@@ -32,8 +33,6 @@ public class Signalization : MonoBehaviour
     
     private void Awake()
     {
-        _isCoroutineStarted = false;        
-        
         _audioSource = GetComponent<AudioSource>();
         _audioSource.volume = _minVolume;
     }
@@ -41,45 +40,43 @@ public class Signalization : MonoBehaviour
     private void OnEnable()
     {
         _door.Detected += OnDetected;
+        _door.UnDetected += OnUnDetected;
     }
 
     private void OnDisable()
     {
         _door.Detected -= OnDetected; 
+        _door.UnDetected -= OnUnDetected;
     }
 
-    private IEnumerator Activate()
+    private IEnumerator Activate(float target)
     {
-        _isCoroutineStarted = true;
-        
         var waitForOneSecond = new WaitForSeconds(_timeBetweenIterations);
-        
         _audioSource.Play();
         
-        while (_audioSource.volume >= _minVolume)
+        while (_audioSource.volume != target)
         {
-            if (_robber.Reached)
-            {
-                _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, _maxVolume, _volumeSpeed);
-            }
-            else
-            {
-                _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, _minVolume, _volumeSpeed);
-                
-                if(_audioSource.volume <= _minVolume)
-                    break;
-            }
+            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, target, _volumeSpeed);
             
             yield return waitForOneSecond;
         }
         
         _audioSource.Stop();
-        _isCoroutineStarted = false;
     }
-    
+
     private void OnDetected()
     {
-        if(_isCoroutineStarted)
-            StartCoroutine(Activate());
+        if(_coroutine != null)
+            StopCoroutine(_coroutine);
+        
+        _coroutine = StartCoroutine(Activate(_maxVolume));
+    }
+
+    private void OnUnDetected()
+    {
+        if (_coroutine != null)
+            StopCoroutine(_coroutine);
+        
+        _coroutine = StartCoroutine(Activate(_minVolume));
     }
 }
