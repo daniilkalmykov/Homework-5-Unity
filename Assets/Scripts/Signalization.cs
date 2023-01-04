@@ -1,11 +1,9 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 public class Signalization : MonoBehaviour
 {
-    [SerializeField] private Robber _robber;
     [SerializeField] private Door _door;
     [SerializeField] private float _minVolume;
     [SerializeField] private float _maxVolume;
@@ -66,17 +64,19 @@ public class Signalization : MonoBehaviour
 
     private void OnDetected()
     {
-        if(_coroutine != null)
-            StopCoroutine(_coroutine);
-        
-        _coroutine = StartCoroutine(Activate(_maxVolume));
+        ActivateCoroutine(_maxVolume);
     }
 
     private void OnUnDetected()
     {
+        ActivateCoroutine(_minVolume);
+    }
+
+    private void ActivateCoroutine(float target)
+    {
         if (_coroutine != null)
             StopCoroutine(_coroutine);
         
-        _coroutine = StartCoroutine(Activate(_minVolume));
+        _coroutine = StartCoroutine(Activate(target));
     }
 }
