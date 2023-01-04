@@ -4,15 +4,15 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class Signalization : MonoBehaviour
 {
+    private const float MinDifference = 0.1f;
+    private const float MinTimeBetweenIterations = 0.1f;
+    
     [SerializeField] private Door _door;
     [SerializeField] private float _minVolume;
     [SerializeField] private float _maxVolume;
     [SerializeField] private float _timeBetweenIterations;
     [SerializeField, Range(0, 1)] private float _volumeSpeed;
-
-    private const float MinDifference = 0.1f;
-    private const float MinTimeBetweenIterations = 0.1f;
-
+    
     private AudioSource _audioSource;
     private Coroutine _coroutine;
     

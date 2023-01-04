@@ -8,7 +8,7 @@ public class Robber : MonoBehaviour
     [SerializeField] private Transform _point;
     [SerializeField] private float _delay;
     [SerializeField] private float _speed;
-
+    
     private readonly int _speedAnimatorParameter = Animator.StringToHash("Speed");
     
     private Animator _animator;
