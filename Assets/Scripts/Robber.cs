@@ -4,12 +4,12 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class Robber : MonoBehaviour
 {
-    private readonly int _speedAnimatorParameter = Animator.StringToHash("Speed");
-    
     [SerializeField] private Door _door;
     [SerializeField] private Transform _point;
     [SerializeField] private float _delay;
     [SerializeField] private float _speed;
+    
+    private readonly int _speedAnimatorParameter = Animator.StringToHash("Speed");
     
     private Animator _animator;
     private Vector3 _target;
@@ -24,12 +24,12 @@ public class Robber : MonoBehaviour
 
     private void OnEnable()
     {
-        _door.Detected += OnReached;
+        _door.Detected += OnDetected;
     }
 
     private void OnDisable()
     {
-        _door.Detected -= OnReached;
+        _door.Detected -= OnDetected;
     }
 
     private void Start()
@@ -48,7 +48,7 @@ public class Robber : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, _target, _speed * Time.deltaTime);
     }
 
-    private void OnReached()
+    private void OnDetected()
     {
         StartCoroutine(StayInTrigger());
         
